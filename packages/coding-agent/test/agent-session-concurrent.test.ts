@@ -5,9 +5,9 @@
 import { existsSync, mkdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { Type } from "@sinclair/typebox";
 import { Agent } from "@tobarrientos2/rho-agent-core";
 import { type AssistantMessage, type AssistantMessageEvent, EventStream, getModel } from "@tobarrientos2/rho-ai";
-import { Type } from "@sinclair/typebox";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { AgentSession } from "../src/core/agent-session.js";
 import { AuthStorage } from "../src/core/auth-storage.js";

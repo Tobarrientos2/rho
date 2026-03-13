@@ -1,5 +1,5 @@
-import type { AgentTool } from "@tobarrientos2/rho-agent-core";
 import { type Static, Type } from "@sinclair/typebox";
+import type { AgentTool } from "@tobarrientos2/rho-agent-core";
 import { existsSync, readdirSync, statSync } from "fs";
 import nodePath from "path";
 import { resolveToCwd } from "./path-utils.js";

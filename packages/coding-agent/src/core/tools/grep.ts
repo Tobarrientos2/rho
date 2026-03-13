@@ -1,6 +1,6 @@
 import { createInterface } from "node:readline";
-import type { AgentTool } from "@tobarrientos2/rho-agent-core";
 import { type Static, Type } from "@sinclair/typebox";
+import type { AgentTool } from "@tobarrientos2/rho-agent-core";
 import { spawn } from "child_process";
 import { readFileSync, statSync } from "fs";
 import path from "path";

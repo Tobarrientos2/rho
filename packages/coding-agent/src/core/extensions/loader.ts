@@ -10,15 +10,15 @@ import * as os from "node:os";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createJiti } from "@mariozechner/jiti";
+// Static imports of packages that extensions may use.
+// These MUST be static so Bun bundles them into the compiled binary.
+// The virtualModules option then makes them available to extensions.
+import * as _bundledTypebox from "@sinclair/typebox";
 import * as _bundledPiAgentCore from "@tobarrientos2/rho-agent-core";
 import * as _bundledPiAi from "@tobarrientos2/rho-ai";
 import * as _bundledPiAiOauth from "@tobarrientos2/rho-ai/oauth";
 import type { KeyId } from "@tobarrientos2/rho-tui";
 import * as _bundledPiTui from "@tobarrientos2/rho-tui";
-// Static imports of packages that extensions may use.
-// These MUST be static so Bun bundles them into the compiled binary.
-// The virtualModules option then makes them available to extensions.
-import * as _bundledTypebox from "@sinclair/typebox";
 import { getAgentDir, isBunBinary } from "../../config.js";
 // NOTE: This import works because loader.ts exports are NOT re-exported from index.ts,
 // avoiding a circular dependency. Extensions can import from @tobarrientos2/rho-coding-agent.

@@ -1,5 +1,5 @@
-import { Text, type TUI } from "@tobarrientos2/rho-tui";
 import { Type } from "@sinclair/typebox";
+import { Text, type TUI } from "@tobarrientos2/rho-tui";
 import stripAnsi from "strip-ansi";
 import { beforeAll, describe, expect, test } from "vitest";
 import type { ToolDefinition } from "../src/core/extensions/types.js";

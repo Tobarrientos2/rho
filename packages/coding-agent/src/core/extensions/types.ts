@@ -8,6 +8,7 @@
  * - Interact with the user via UI primitives
  */
 
+import type { Static, TSchema } from "@sinclair/typebox";
 import type {
 	AgentMessage,
 	AgentToolResult,
@@ -37,7 +38,6 @@ import type {
 	OverlayOptions,
 	TUI,
 } from "@tobarrientos2/rho-tui";
-import type { Static, TSchema } from "@sinclair/typebox";
 import type { Theme } from "../../modes/interactive/theme/theme.js";
 import type { BashResult } from "../bash-executor.js";
 import type { CompactionPreparation, CompactionResult } from "../compaction/index.js";

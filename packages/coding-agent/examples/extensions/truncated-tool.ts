@@ -14,6 +14,7 @@
  * built-in `grep` tool in src/core/tools/grep.ts for a more complete implementation.
  */
 
+import { Type } from "@sinclair/typebox";
 import type { ExtensionAPI } from "@tobarrientos2/rho-coding-agent";
 import {
 	DEFAULT_MAX_BYTES,
@@ -23,7 +24,6 @@ import {
 	truncateHead,
 } from "@tobarrientos2/rho-coding-agent";
 import { Text } from "@tobarrientos2/rho-tui";
-import { Type } from "@sinclair/typebox";
 import { execSync } from "child_process";
 import { mkdtempSync, writeFileSync } from "fs";
 import { tmpdir } from "os";

@@ -10,10 +10,10 @@
  * correct for that point in history.
  */
 
+import { Type } from "@sinclair/typebox";
 import { StringEnum } from "@tobarrientos2/rho-ai";
 import type { ExtensionAPI, ExtensionContext, Theme } from "@tobarrientos2/rho-coding-agent";
 import { matchesKey, Text, truncateToWidth } from "@tobarrientos2/rho-tui";
-import { Type } from "@sinclair/typebox";
 
 interface Todo {
 	id: number;

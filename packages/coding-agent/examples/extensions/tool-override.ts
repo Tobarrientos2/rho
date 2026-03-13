@@ -20,9 +20,9 @@
  *   pi -e ./tool-override.ts
  */
 
+import { Type } from "@sinclair/typebox";
 import type { TextContent } from "@tobarrientos2/rho-ai";
 import { type ExtensionAPI, getAgentDir } from "@tobarrientos2/rho-coding-agent";
-import { Type } from "@sinclair/typebox";
 import { appendFileSync, constants, readFileSync } from "fs";
 import { access, readFile } from "fs/promises";
 import { join, resolve } from "path";

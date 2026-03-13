@@ -1,6 +1,6 @@
+import { type Static, Type } from "@sinclair/typebox";
 import type { AgentTool } from "@tobarrientos2/rho-agent-core";
 import type { ImageContent, TextContent } from "@tobarrientos2/rho-ai";
-import { type Static, Type } from "@sinclair/typebox";
 import { constants } from "fs";
 import { access as fsAccess, readFile as fsReadFile } from "fs/promises";
 import { formatDimensionNote, resizeImage } from "../../utils/image-resize.js";

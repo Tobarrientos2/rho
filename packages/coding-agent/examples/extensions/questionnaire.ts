@@ -5,9 +5,9 @@
  * Multiple questions: tab bar navigation between questions
  */
 
+import { Type } from "@sinclair/typebox";
 import type { ExtensionAPI } from "@tobarrientos2/rho-coding-agent";
 import { Editor, type EditorTheme, Key, matchesKey, Text, truncateToWidth } from "@tobarrientos2/rho-tui";
-import { Type } from "@sinclair/typebox";
 
 // Types
 interface QuestionOption {

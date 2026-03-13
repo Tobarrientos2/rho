@@ -29,9 +29,9 @@ import { randomUUID } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { type Static, Type } from "@sinclair/typebox";
 import { StringEnum } from "@tobarrientos2/rho-ai";
 import { type ExtensionAPI, getAgentDir } from "@tobarrientos2/rho-coding-agent";
-import { type Static, Type } from "@sinclair/typebox";
 
 const PROVIDER = "google-antigravity";
 

@@ -2,6 +2,7 @@
  * Model registry - manages built-in and custom models, provides API key resolution.
  */
 
+import { type Static, Type } from "@sinclair/typebox";
 import {
 	type Api,
 	type AssistantMessageEventStream,
@@ -18,7 +19,6 @@ import {
 	type SimpleStreamOptions,
 } from "@tobarrientos2/rho-ai";
 import { registerOAuthProvider, resetOAuthProviders } from "@tobarrientos2/rho-ai/oauth";
-import { type Static, Type } from "@sinclair/typebox";
 import AjvModule from "ajv";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";

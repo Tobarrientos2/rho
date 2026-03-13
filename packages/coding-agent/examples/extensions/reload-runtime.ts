@@ -5,8 +5,8 @@
  * tool that queues a follow-up command to trigger reload.
  */
 
-import type { ExtensionAPI } from "@tobarrientos2/rho-coding-agent";
 import { Type } from "@sinclair/typebox";
+import type { ExtensionAPI } from "@tobarrientos2/rho-coding-agent";
 
 export default function (pi: ExtensionAPI) {
 	// Command entrypoint for reload.
