@@ -34,6 +34,9 @@ import { initTheme, stopThemeWatcher } from "./modes/interactive/theme/theme.js"
 /**
  * Read all content from piped stdin.
  * Returns undefined if stdin is a TTY (interactive terminal).
+ * 
+ * Race condition fix: use a flag to track if stdin was ever received,
+ * combined with a timeout to avoid hanging.
  */
 async function readPipedStdin(): Promise<string | undefined> {
 	// If stdin is a TTY, we're running interactively - don't read stdin
@@ -41,16 +44,57 @@ async function readPipedStdin(): Promise<string | undefined> {
 		return undefined;
 	}
 
+	let data = "";
+	let stdinReceived = false;
+	let resolved = false;
+	let resolver: (value: string | undefined) => void;
+
+	const doResolve = (result: string | undefined) => {
+		if (resolved) return;
+		resolved = true;
+		clearTimeout(timeout);
+		clearInterval(dataCheck);
+		// Close stdin to prevent it from keeping the process alive
+		process.stdin.pause();
+		try {
+			process.stdin.destroy();
+		} catch {}
+		resolver(result);
+	};
+
+	// Timeout after 5 seconds - treat as interactive if no data
+	const timeout = setTimeout(() => {
+		// Only resolve as undefined if we never received any data
+		// Otherwise, wait for the 'end' event
+		if (!stdinReceived) {
+			doResolve(undefined);
+		}
+	}, 5000);
+
+	// Periodic check for data (helps detect pipe closure)
+	const dataCheck = setInterval(() => {
+		if (data.length > 0 && !stdinReceived) {
+			stdinReceived = true;
+		}
+	}, 100);
+
+	process.stdin.setEncoding("utf8");
+	process.stdin.on("data", (chunk) => {
+		data += chunk;
+		stdinReceived = true;
+	});
+	process.stdin.on("end", () => {
+		clearInterval(dataCheck);
+		doResolve(data.trim() || undefined);
+	});
+	process.stdin.on("error", () => {
+		clearInterval(dataCheck);
+		doResolve(undefined);
+	});
+	process.stdin.resume();
+
 	return new Promise((resolve) => {
-		let data = "";
-		process.stdin.setEncoding("utf8");
-		process.stdin.on("data", (chunk) => {
-			data += chunk;
-		});
-		process.stdin.on("end", () => {
-			resolve(data.trim() || undefined);
-		});
-		process.stdin.resume();
+		resolver = resolve;
 	});
 }
 
@@ -806,16 +850,23 @@ export async function main(args: string[]) {
 		});
 		await mode.run();
 	} else {
-		await runPrintMode(session, {
-			mode,
-			messages: parsed.messages,
-			initialMessage,
-			initialImages,
-		});
-		stopThemeWatcher();
-		if (process.stdout.writableLength > 0) {
-			await new Promise<void>((resolve) => process.stdout.once("drain", resolve));
+		// Run print mode with a safety timeout
+		const exitTimeout = setTimeout(() => {
+			console.error("\n[Warning] Print mode did not exit cleanly, forcing exit");
+			process.exit(0);
+		}, 30000); // 30 second safety timeout
+
+		try {
+			await runPrintMode(session, {
+				mode,
+				messages: parsed.messages,
+				initialMessage,
+				initialImages,
+			});
+		} finally {
+			clearTimeout(exitTimeout);
+			stopThemeWatcher();
+			process.exit(0);
 		}
-		process.exit(0);
 	}
 }
