@@ -7,8 +7,8 @@
  * Usage: /status [message] - sends a status message with custom rendering
  */
 
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { Box, Text } from "@mariozechner/pi-tui";
+import type { ExtensionAPI } from "@tobarrientos2/rho-coding-agent";
+import { Box, Text } from "@tobarrientos2/rho-tui";
 
 export default function (pi: ExtensionAPI) {
 	// Register custom renderer for "status-update" messages

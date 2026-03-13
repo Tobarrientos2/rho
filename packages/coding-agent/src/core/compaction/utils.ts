@@ -2,8 +2,8 @@
  * Shared utilities for compaction and branch summarization.
  */
 
-import type { AgentMessage } from "@mariozechner/pi-agent-core";
-import type { Message } from "@mariozechner/pi-ai";
+import type { AgentMessage } from "@tobarrientos2/rho-agent-core";
+import type { Message } from "@tobarrientos2/rho-ai";
 
 // ============================================================================
 // File Operation Tracking

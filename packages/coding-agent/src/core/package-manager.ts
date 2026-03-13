@@ -85,7 +85,7 @@ type LocalSource = {
 
 type ParsedSource = NpmSource | GitSource | LocalSource;
 
-interface PiManifest {
+interface RhoManifest {
 	extensions?: string[];
 	skills?: string[];
 	prompts?: string[];
@@ -403,10 +403,10 @@ function collectAutoThemeEntries(dir: string): string[] {
 	return entries;
 }
 
-function readPiManifestFile(packageJsonPath: string): PiManifest | null {
+function readRhoManifestFile(packageJsonPath: string): RhoManifest | null {
 	try {
 		const content = readFileSync(packageJsonPath, "utf-8");
-		const pkg = JSON.parse(content) as { pi?: PiManifest };
+		const pkg = JSON.parse(content) as { rho?: RhoManifest };
 		return pkg.rho ?? null;
 	} catch {
 		return null;
@@ -416,7 +416,7 @@ function readPiManifestFile(packageJsonPath: string): PiManifest | null {
 function resolveExtensionEntries(dir: string): string[] | null {
 	const packageJsonPath = join(dir, "package.json");
 	if (existsSync(packageJsonPath)) {
-		const manifest = readPiManifestFile(packageJsonPath);
+		const manifest = readRhoManifestFile(packageJsonPath);
 		if (manifest?.extensions?.length) {
 			const entries: string[] = [];
 			for (const extPath of manifest.extensions) {
@@ -1392,10 +1392,10 @@ export class DefaultPackageManager implements PackageManager {
 			return true;
 		}
 
-		const manifest = this.readPiManifest(packageRoot);
+		const manifest = this.readRhoManifest(packageRoot);
 		if (manifest) {
 			for (const resourceType of RESOURCE_TYPES) {
-				const entries = manifest[resourceType as keyof PiManifest];
+				const entries = manifest[resourceType as keyof RhoManifest];
 				this.addManifestEntries(
 					entries,
 					packageRoot,
@@ -1428,8 +1428,8 @@ export class DefaultPackageManager implements PackageManager {
 		target: Map<string, { metadata: PathMetadata; enabled: boolean }>,
 		metadata: PathMetadata,
 	): void {
-		const manifest = this.readPiManifest(packageRoot);
-		const entries = manifest?.[resourceType as keyof PiManifest];
+		const manifest = this.readRhoManifest(packageRoot);
+		const entries = manifest?.[resourceType as keyof RhoManifest];
 		if (entries) {
 			this.addManifestEntries(entries, packageRoot, resourceType, target, metadata);
 			return;
@@ -1479,8 +1479,8 @@ export class DefaultPackageManager implements PackageManager {
 		packageRoot: string,
 		resourceType: ResourceType,
 	): { allFiles: string[]; enabledByManifest: Set<string> } {
-		const manifest = this.readPiManifest(packageRoot);
-		const entries = manifest?.[resourceType as keyof PiManifest];
+		const manifest = this.readRhoManifest(packageRoot);
+		const entries = manifest?.[resourceType as keyof RhoManifest];
 		if (entries && entries.length > 0) {
 			const allFiles = this.collectFilesFromManifestEntries(entries, packageRoot, resourceType);
 			const manifestPatterns = entries.filter(isPattern);
@@ -1497,7 +1497,7 @@ export class DefaultPackageManager implements PackageManager {
 		return { allFiles, enabledByManifest: new Set(allFiles) };
 	}
 
-	private readPiManifest(packageRoot: string): PiManifest | null {
+	private readRhoManifest(packageRoot: string): RhoManifest | null {
 		const packageJsonPath = join(packageRoot, "package.json");
 		if (!existsSync(packageJsonPath)) {
 			return null;
@@ -1505,7 +1505,7 @@ export class DefaultPackageManager implements PackageManager {
 
 		try {
 			const content = readFileSync(packageJsonPath, "utf-8");
-			const pkg = JSON.parse(content) as { pi?: PiManifest };
+			const pkg = JSON.parse(content) as { rho?: RhoManifest };
 			return pkg.rho ?? null;
 		} catch {
 			return null;

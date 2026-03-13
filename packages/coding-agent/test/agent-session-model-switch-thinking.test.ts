@@ -1,5 +1,5 @@
-import { Agent, type ThinkingLevel } from "@mariozechner/pi-agent-core";
-import { getModel } from "@mariozechner/pi-ai";
+import { Agent, type ThinkingLevel } from "@tobarrientos2/rho-agent-core";
+import { getModel } from "@tobarrientos2/rho-ai";
 import { describe, expect, it } from "vitest";
 import { AgentSession } from "../src/core/agent-session.js";
 import { AuthStorage } from "../src/core/auth-storage.js";

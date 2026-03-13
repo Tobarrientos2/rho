@@ -3,10 +3,10 @@
 	"compilerOptions": {
 		"noEmit": true,
 		"paths": {
-			"@mariozechner/pi-coding-agent": ["./src/index.ts"],
-			"@mariozechner/pi-coding-agent/hooks": ["./src/core/hooks/index.ts"],
-			"@mariozechner/pi-tui": ["../tui/src/index.ts"],
-			"@mariozechner/pi-ai": ["../ai/src/index.ts"],
+			"@tobarrientos2/rho-coding-agent": ["./src/index.ts"],
+			"@tobarrientos2/rho-coding-agent/hooks": ["./src/core/hooks/index.ts"],
+			"@tobarrientos2/rho-tui": ["../tui/src/index.ts"],
+			"@tobarrientos2/rho-ai": ["../ai/src/index.ts"],
 			"@sinclair/typebox": ["../../node_modules/@sinclair/typebox"]
 		},
 		"skipLibCheck": true

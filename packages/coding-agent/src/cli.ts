@@ -7,8 +7,8 @@
  */
 process.title = "rho";
 
-import { setBedrockProviderModule } from "@mariozechner/pi-ai";
-import { bedrockProviderModule } from "@mariozechner/pi-ai/bedrock-provider";
+import { setBedrockProviderModule } from "@tobarrientos2/rho-ai";
+import { bedrockProviderModule } from "@tobarrientos2/rho-ai/bedrock-provider";
 import { EnvHttpProxyAgent, setGlobalDispatcher } from "undici";
 import { main } from "./main.js";
 
