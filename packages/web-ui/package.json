@@ -1,5 +1,5 @@
 {
-	"name": "@mariozechner/pi-web-ui",
+	"name": "@tobarrientos2/rho-web-ui",
 	"version": "0.57.1",
 	"description": "Reusable web UI components for AI chat interfaces powered by @mariozechner/pi-ai",
 	"type": "module",

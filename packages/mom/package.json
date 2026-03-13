@@ -1,5 +1,5 @@
 {
-	"name": "@mariozechner/pi-mom",
+	"name": "@tobarrientos2/rho-mom",
 	"version": "0.57.1",
 	"description": "Slack bot that delegates messages to the pi coding agent",
 	"type": "module",
@@ -45,7 +45,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/badlogic/pi-mono.git",
+		"url": "git+https://github.com/badlogic/rho-mono.git",
 		"directory": "packages/mom"
 	},
 	"engines": {

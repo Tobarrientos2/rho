@@ -407,7 +407,7 @@ function readPiManifestFile(packageJsonPath: string): PiManifest | null {
 	try {
 		const content = readFileSync(packageJsonPath, "utf-8");
 		const pkg = JSON.parse(content) as { pi?: PiManifest };
-		return pkg.pi ?? null;
+		return pkg.rho ?? null;
 	} catch {
 		return null;
 	}
@@ -1506,7 +1506,7 @@ export class DefaultPackageManager implements PackageManager {
 		try {
 			const content = readFileSync(packageJsonPath, "utf-8");
 			const pkg = JSON.parse(content) as { pi?: PiManifest };
-			return pkg.pi ?? null;
+			return pkg.rho ?? null;
 		} catch {
 			return null;
 		}
